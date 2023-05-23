@@ -1,0 +1,13 @@
+FROM ghcr.io/korvoj/wasm-serverless-benchmarks/util/rust-wasmedge-builder:1.64.0-bullseye as builder
+RUN mkdir /build
+COPY . /build/
+RUN ls -lah /build
+WORKDIR /build
+RUN cargo build --target wasm32-wasi --release
+RUN ls -lah
+RUN wasmedgec target/wasm32-wasi/release/zip-compression.wasm target/wasm32-wasi/release/zip-compression.aot.wasm
+RUN chmod +x target/wasm32-wasi/release/zip-compression.aot.wasm
+
+FROM scratch
+COPY --from=builder /build/target/wasm32-wasi/release/zip-compression.aot.wasm /
+ENTRYPOINT ["/zip-compression.aot.wasm"]

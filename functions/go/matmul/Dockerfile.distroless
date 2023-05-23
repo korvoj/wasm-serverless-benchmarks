@@ -1,0 +1,9 @@
+FROM docker.io/golang:1.19.1-buster as builder
+RUN mkdir /build
+COPY . /build/
+WORKDIR /build
+RUN go build -o matmul.out main.go && chmod +x matmul.out
+
+FROM gcr.io/distroless/cc-debian11
+COPY --from=builder /build/matmul.out /matmul
+ENTRYPOINT ["/matmul"]

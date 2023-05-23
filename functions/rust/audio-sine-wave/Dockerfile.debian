@@ -1,0 +1,12 @@
+FROM docker.io/rust:1.64.0-bullseye as builder
+RUN mkdir /build
+COPY . /build/
+RUN ls -lah /build
+WORKDIR /build
+RUN cargo build --release
+RUN ls -lah target/
+RUN chmod +x target/release/audio-sine-wave
+
+FROM docker.io/debian:bullseye
+COPY --from=builder /build/target/release/audio-sine-wave /
+ENTRYPOINT ["/audio-sine-wave"]

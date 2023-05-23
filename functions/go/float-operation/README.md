@@ -1,0 +1,1 @@
+Adapted from [FunctionBench float-operation benchmark](https://github.com/ddps-lab/serverless-faas-workbench/tree/master/aws/cpu-memory/float_operation).

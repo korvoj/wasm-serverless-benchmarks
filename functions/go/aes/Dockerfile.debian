@@ -1,0 +1,9 @@
+FROM docker.io/golang:1.19.1-buster as builder
+RUN mkdir /build
+COPY . /build/
+WORKDIR /build
+RUN go build -o aes.out main.go && chmod +x aes.out
+
+FROM docker.io/debian:bullseye
+COPY --from=builder /build/aes.out /aes
+ENTRYPOINT ["/aes"]

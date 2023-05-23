@@ -1,0 +1,13 @@
+FROM ghcr.io/korvoj/wasm-serverless-benchmarks/util/tinygo-wasmer-builder:0.26.0 as builder
+USER root
+RUN mkdir /build
+RUN chown -R tinygo:tinygo /build
+USER tinygo
+COPY . /build/
+WORKDIR /build
+RUN tinygo build -o float-operation.wasm -target wasi main.go
+RUN chmod +x float-operation.wasm
+
+FROM scratch
+COPY --from=builder /build/float-operation.wasm /
+ENTRYPOINT ["/float-operation.wasm"]

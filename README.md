@@ -80,7 +80,7 @@ apt install make git gcc build-essential pkgconf libtool libsystemd-dev libproto
 
 # install wasmer (2.3.0)
 curl https://get.wasmer.io -sSfL | sh
-source /home/vojdan/.wasmer/wasmer.sh
+source ~/.wasmer/wasmer.sh
 apt install libtinfo5
 
 # clone crun repository

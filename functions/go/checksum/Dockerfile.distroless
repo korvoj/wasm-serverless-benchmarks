@@ -1,0 +1,9 @@
+FROM docker.io/golang:1.19.1-buster as builder
+RUN mkdir /build
+COPY . /build/
+WORKDIR /build
+RUN go build -o checksum.out main.go && chmod +x checksum.out
+
+FROM gcr.io/distroless/cc-debian11
+COPY --from=builder /build/checksum.out /checksum
+ENTRYPOINT ["/checksum"]

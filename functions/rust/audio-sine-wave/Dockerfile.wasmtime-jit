@@ -1,0 +1,12 @@
+FROM ghcr.io/korvoj/wasm-serverless-benchmarks/util/rust-wasmtime-builder:1.64.0-bullseye as builder
+RUN mkdir /build
+COPY . /build/
+RUN ls -lah /build
+WORKDIR /build
+RUN cargo build --target wasm32-wasi --release
+RUN ls -lah
+RUN chmod +x target/wasm32-wasi/release/audio-sine-wave.wasm
+
+FROM scratch
+COPY --from=builder /build/target/wasm32-wasi/release/audio-sine-wave.wasm /
+ENTRYPOINT ["/audio-sine-wave.wasm"]

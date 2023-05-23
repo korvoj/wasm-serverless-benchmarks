@@ -1,0 +1,1 @@
+Inspired by [FunctionBench disk benchmarks](https://github.com/ddps-lab/serverless-faas-workbench/tree/master/aws/disk).

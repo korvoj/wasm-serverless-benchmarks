@@ -1,0 +1,11 @@
+FROM ghcr.io/korvoj/wasm-serverless-benchmarks/util/rust-wasmedge-builder:1.64.0-bullseye as builder
+RUN mkdir /build
+COPY . /build/
+RUN ls -lah /build
+WORKDIR /build
+RUN cargo build --target wasm32-wasi --release
+RUN ls -lah
+
+FROM scratch
+COPY --from=builder /build/target/wasm32-wasi/release/prime-numbers.wasm /
+ENTRYPOINT ["/prime-numbers.wasm"]
