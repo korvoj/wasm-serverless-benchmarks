@@ -1,7 +1,7 @@
 # WebAssembly as an Enabler for Next Generation Serverless Computing
 
 ## Introduction
-This repository contains complementary data for the paper titled "WebAssembly as an Enabler for Next Generation Serverless Computing".
+This repository contains complementary data for the paper titled "WebAssembly as an Enabler for Next Generation Serverless Computing" (*Kjorveziroski, V., Filiposka, S. WebAssembly as an Enabler for Next Generation Serverless Computing. J Grid Computing 21, 34 (2023). [https://doi.org/10.1007/s10723-023-09669-8](https://doi.org/10.1007/s10723-023-09669-8)*).
 
 The repository is organized around 5 core directories:
 
